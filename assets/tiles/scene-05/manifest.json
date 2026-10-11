@@ -1,0 +1,26 @@
+{
+ "source": {
+  "width": 8000,
+  "height": 4000
+ },
+ "tileSize": 512,
+ "levels": [
+  {
+   "size": 256,
+   "tileSize": 256,
+   "fallbackOnly": true
+  },
+  {
+   "size": 512,
+   "tileSize": 512
+  },
+  {
+   "size": 1024,
+   "tileSize": 512
+  },
+  {
+   "size": 2048,
+   "tileSize": 512
+  }
+ ]
+}

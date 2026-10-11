@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "school": {
+    "name": "Talent World International Schools",
+    "subtitle": "Girls School · Virtual Tour",
+    "tagline": "Step inside. Look around. Find your way.",
+    "nameSource": "Taken from the exterior signage visible in scene-01. Edit here if the official name differs."
+  },
+  "assets": {
+    "panoramaDir": "assets/panoramas",
+    "tileDir": "assets/tiles",
+    "thumbDir": "assets/thumbs"
+  },
+  "startScene": "scene-01",
+  "tour": {
+    "order": [
+      "scene-01",
+      "scene-04",
+      "scene-05",
+      "scene-03",
+      "scene-02"
+    ],
+    "defaultDwellSeconds": 12,
+    "note": "Tour order is a presentation sequence only. It does not imply the scenes are physically adjacent; the viewer only 'walks' between scenes that have a link hotspot."
+  },
+  "linkStatuses": {
+    "confirmed": "Confirmed on site by the school/owner.",
+    "visual": "Supported by what is visible in the panoramas themselves; not yet confirmed on site.",
+    "unverified": "Candidate only. Hidden from visitors; shown dashed in the editor (?edit=1)."
+  },
+  "scenes": [
+    {
+      "id": "scene-01",
+      "short": "Exterior",
+      "name": "Scene 01",
+      "title": "Exterior — Gate 1",
+      "provisional": true,
+      "file": "assets/panoramas/scene-01.jpg",
+      "source": {
+        "insta360Name": "IMG_20261008_144110_00_004.insp",
+        "camera": "Insta360 X6",
+        "captured": "2026-10-08 14:41"
+      },
+      "initialView": {
+        "yaw": 5,
+        "pitch": 3,
+        "fov": 80
+      },
+      "map": {
+        "x": 14,
+        "y": 28
+      },
+      "description": "Outdoor road in front of the school building. The signage reads \"Talent World International Schools\" with \"Girls School\" below it, and a numbered \"GATE 1\" sign marks the double doors beside it.",
+      "tour": {
+        "text": "We start outside on the road in front of the building. The sign reads Talent World International Schools — Girls School, and Gate 1 is the double door beside it."
+      },
+      "hotspots": [
+        {
+          "id": "s01-info-sign",
+          "type": "info",
+          "yaw": -6,
+          "pitch": 16,
+          "label": "School signage",
+          "title": "School signage",
+          "text": "Bilingual signage (English and Arabic): \"Talent World International Schools\", with \"Girls School\" beneath."
+        },
+        {
+          "id": "s01-info-gate",
+          "type": "info",
+          "yaw": 17,
+          "pitch": 4,
+          "label": "Gate 1",
+          "title": "Gate 1",
+          "text": "The sign next to the double doors is numbered \"GATE 1\"."
+        },
+        {
+          "id": "s01-link-s04",
+          "type": "link",
+          "yaw": 7,
+          "pitch": 2,
+          "label": "Enter the school",
+          "target": "scene-04",
+          "status": "confirmed",
+          "placement": "exact",
+          "entry": {
+            "yaw": 0,
+            "pitch": 0,
+            "fov": 78
+          },
+          "evidence": "Added at the project owner's request: Gate 1 is the visitor entrance. The photos don't show what is behind the doors, so the arrival view (lobby, facing reception) is an estimate. No return link: Scene 04 shows no exit to the street."
+        }
+      ]
+    },
+    {
+      "id": "scene-02",
+      "short": "Hall · stage",
+      "name": "Scene 02",
+      "title": "Covered hall — stage end",
+      "provisional": true,
+      "file": "assets/panoramas/scene-02.jpg",
+      "source": {
+        "insta360Name": "IMG_20261008_144321_00_005.insp",
+        "camera": "Insta360 X6",
+        "captured": "2026-10-08 14:43"
+      },
+      "initialView": {
+        "yaw": -40,
+        "pitch": -5,
+        "fov": 80
+      },
+      "map": {
+        "x": 76,
+        "y": 72
+      },
+      "description": "Large covered hall with a fabric-membrane roof on white steel arches, a floor painted in colour (purple, blue, green) with white court lines, tiered blue seating along the left, and a raised stage area at the far end.",
+      "tour": {
+        "text": "Inside the covered hall. The floor is painted with flowing purple, blue and green shapes and white court lines, and tiered blue seating runs along one side."
+      },
+      "hotspots": [
+        {
+          "id": "s02-link-s03",
+          "type": "link",
+          "yaw": 140,
+          "pitch": -30,
+          "label": "Back along the hall",
+          "target": "scene-03",
+          "status": "visual",
+          "placement": "approximate",
+          "entry": {
+            "yaw": 70,
+            "pitch": -2,
+            "fov": 78
+          },
+          "evidence": "Scene 02 and Scene 03 show the same hall (same tiered seating, floor artwork, stage). Scene 03 is taken from farther from the stage, so the link points away from the stage. Exact position is approximate — refine in the editor."
+        },
+        {
+          "id": "s02-info-seats",
+          "type": "info",
+          "yaw": -90,
+          "pitch": -10,
+          "label": "Tiered seating",
+          "title": "Tiered seating",
+          "text": "Stepped, concrete-style tiers with blue moulded seats run along one side of the hall."
+        },
+        {
+          "id": "s02-info-floor",
+          "type": "info",
+          "yaw": 0,
+          "pitch": -38,
+          "label": "Painted floor",
+          "title": "Painted floor and court lines",
+          "text": "The floor is coloured in purple, blue and green shapes with white court-style line markings."
+        }
+      ]
+    },
+    {
+      "id": "scene-03",
+      "short": "Hall · entrance",
+      "name": "Scene 03",
+      "title": "Covered hall — building entrance",
+      "provisional": true,
+      "file": "assets/panoramas/scene-03.jpg",
+      "source": {
+        "insta360Name": "IMG_20261008_144418_00_006.insp",
+        "camera": "Insta360 X6",
+        "captured": "2026-10-08 14:44"
+      },
+      "initialView": {
+        "yaw": -45,
+        "pitch": -3,
+        "fov": 80
+      },
+      "map": {
+        "x": 76,
+        "y": 28
+      },
+      "description": "The same covered hall, seen from a spot farther from the stage. A rounded, columned entrance with a wide stepped approach, handrails and a ramp rail leads to glass doors into the main building.",
+      "tour": {
+        "text": "The same hall from further back. Opposite the seating, a wide stepped entrance with handrails leads to glass doors into the main building."
+      },
+      "hotspots": [
+        {
+          "id": "s03-link-s04",
+          "type": "link",
+          "yaw": 0,
+          "pitch": 8,
+          "label": "Glass doors → Lobby",
+          "target": "scene-04",
+          "status": "visual",
+          "placement": "exact",
+          "entry": {
+            "yaw": 2,
+            "pitch": 0,
+            "fov": 78
+          },
+          "evidence": "Scene 04 shows this hall (blue seating, painted floor) through its left-hand glass door; Scene 03 shows a stepped, railed entrance with glass doors into the building. Both ends of this doorway are visible."
+        },
+        {
+          "id": "s03-link-s02",
+          "type": "link",
+          "yaw": -110,
+          "pitch": -20,
+          "label": "Toward the stage",
+          "target": "scene-02",
+          "status": "visual",
+          "placement": "approximate",
+          "entry": {
+            "yaw": -40,
+            "pitch": -5,
+            "fov": 80
+          },
+          "evidence": "Same hall as Scene 02, which is taken closer to the stage. Position along the floor is approximate."
+        },
+        {
+          "id": "s03-info-steps",
+          "type": "info",
+          "yaw": 20,
+          "pitch": -22,
+          "label": "Stepped entrance",
+          "title": "Stepped entrance",
+          "text": "Wide steps with stainless handrails climb to a columned entrance; a ramp-style rail runs along the right side."
+        },
+        {
+          "id": "s03-info-stage",
+          "type": "info",
+          "yaw": -110,
+          "pitch": 3,
+          "label": "Stage area",
+          "title": "Stage area",
+          "text": "A raised platform with a backdrop and flags is visible at the far end of the hall."
+        },
+        {
+          "id": "s03-info-seats",
+          "type": "info",
+          "yaw": -158,
+          "pitch": -10,
+          "label": "Tiered seating",
+          "title": "Tiered seating",
+          "text": "The blue tiered seating seen in Scene 02, from its other end."
+        }
+      ]
+    },
+    {
+      "id": "scene-04",
+      "short": "Lobby",
+      "name": "Scene 04",
+      "title": "Lobby — reception desk",
+      "provisional": true,
+      "file": "assets/panoramas/scene-04.jpg",
+      "source": {
+        "insta360Name": "IMG_20261008_144547_00_007.insp",
+        "camera": "Insta360 X6",
+        "captured": "2026-10-08 14:45"
+      },
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "fov": 80
+      },
+      "map": {
+        "x": 44,
+        "y": 28
+      },
+      "description": "Indoor lobby with a wood-panelled reception desk carrying the Talent World Schools logo, two dark leather sofas on a rug, and green-and-white balloons and pennant garlands. A glass door on one side looks onto the covered hall.",
+      "tour": {
+        "text": "Inside the main building: the lobby, with the school's reception desk, seating area and a glass door that looks out onto the covered hall."
+      },
+      "hotspots": [
+        {
+          "id": "s04-link-s03",
+          "type": "link",
+          "yaw": -172,
+          "pitch": 4,
+          "label": "Glass door → Covered hall",
+          "target": "scene-03",
+          "status": "visual",
+          "placement": "exact",
+          "entry": {
+            "yaw": -120,
+            "pitch": -5,
+            "fov": 80
+          },
+          "evidence": "The hall's blue seating and painted floor are visible through this glass door; Scene 03 shows the matching entrance from the hall side."
+        },
+        {
+          "id": "s04-link-s05",
+          "type": "link",
+          "yaw": 150,
+          "pitch": -38,
+          "label": "Along the lobby",
+          "target": "scene-05",
+          "status": "visual",
+          "placement": "approximate",
+          "entry": {
+            "yaw": 165,
+            "pitch": 0,
+            "fov": 78
+          },
+          "evidence": "Scene 04 and Scene 05 show the same reception desk, sofas, flags and decorations. Scene 05 is taken much farther from the desk, so the link points away from it. Exact position is approximate — refine in the editor."
+        },
+        {
+          "id": "s04-info-desk",
+          "type": "info",
+          "yaw": 0,
+          "pitch": -10,
+          "label": "Reception desk",
+          "title": "Reception desk",
+          "text": "Wood-panelled wall and desk with the Talent World Schools logo, framed portraits above, and a welcome message on the wall."
+        },
+        {
+          "id": "s04-info-wall",
+          "type": "info",
+          "yaw": 94,
+          "pitch": -4,
+          "label": "\"Think. Explore. Discover. Innovate.\"",
+          "title": "Wall graphic",
+          "text": "A wall graphic reads \"Think. Explore. Discover. Innovate.\" with illustrated signposts (\"Be Kind\", \"Be Curious\")."
+        }
+      ]
+    },
+    {
+      "id": "scene-05",
+      "short": "Lobby · stairs",
+      "name": "Scene 05",
+      "title": "Lobby — stairs and corridor",
+      "provisional": true,
+      "file": "assets/panoramas/scene-05.jpg",
+      "source": {
+        "insta360Name": "IMG_20261008_144627_00_008.insp",
+        "camera": "Insta360 X6",
+        "captured": "2026-10-08 14:46"
+      },
+      "initialView": {
+        "yaw": -14,
+        "pitch": 0,
+        "fov": 80
+      },
+      "map": {
+        "x": 44,
+        "y": 72
+      },
+      "description": "The same lobby seen from farther back. Staircases rise on both sides, a corridor runs off to the right, and flags stand near the reception area in the distance. Wall graphics show school values.",
+      "tour": {
+        "text": "The lobby again from further back. Staircases rise on either side, a corridor leads off to the right, and the wall graphics spell out the school's values."
+      },
+      "hotspots": [
+        {
+          "id": "s05-link-s04",
+          "type": "link",
+          "yaw": -14,
+          "pitch": -22,
+          "label": "Toward reception",
+          "target": "scene-04",
+          "status": "visual",
+          "placement": "approximate",
+          "entry": {
+            "yaw": 0,
+            "pitch": 0,
+            "fov": 80
+          },
+          "evidence": "Same reception desk, sofas and flags as Scene 04, which is taken closer to the desk. Position is approximate."
+        },
+        {
+          "id": "s05-info-skills",
+          "type": "info",
+          "yaw": -66,
+          "pitch": 1,
+          "label": "Skills Display board",
+          "title": "Skills Display board",
+          "text": "A notice board headed \"Skills Display\" hangs on the wall."
+        },
+        {
+          "id": "s05-info-values",
+          "type": "info",
+          "yaw": 140,
+          "pitch": 10,
+          "label": "School values wall",
+          "title": "School values",
+          "text": "The corridor wall lists: Be Curious, Be Kind, Be Confident, Be Respectful, Be You."
+        },
+        {
+          "id": "s05-info-stairs",
+          "type": "info",
+          "yaw": -168,
+          "pitch": -2,
+          "label": "Staircase message",
+          "title": "Staircase",
+          "text": "A wall by the left staircase reads \"Your future is created by what you do today.\""
+        }
+      ]
+    }
+  ]
+}

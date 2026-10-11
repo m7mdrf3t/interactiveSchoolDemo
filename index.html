@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#0b1a24">
+<title>School Virtual Tour</title>
+<meta name="description" content="Explore the school in immersive 360° — move through doorways, jump between locations, or take the guided tour.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a8f9c'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="pano" aria-label="360° panorama viewer"></div>
+
+<!-- Top bar -->
+<header id="topbar" hidden>
+  <button id="btn-menu" class="icon-btn" aria-label="Locations menu" aria-expanded="false" aria-controls="menu">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+  <div class="where">
+    <div class="school" id="school-name"></div>
+    <div class="scene-title"><span id="scene-title"></span><span class="chip" id="scene-chip" title="Names are provisional until confirmed by the school">provisional label</span></div>
+  </div>
+</header>
+
+<!-- Locations menu -->
+<nav id="menu" aria-label="Locations" hidden>
+  <div class="menu-head">
+    <h2>Locations</h2>
+    <button id="menu-close" class="icon-btn small" aria-label="Close menu"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <ol id="menu-list"></ol>
+  <p class="menu-note">Jump to any location from here. Arrows inside a scene only appear where a real doorway connection has been identified.</p>
+  <button id="btn-assets" class="assets-warning" hidden></button>
+</nav>
+
+<!-- Right-hand controls -->
+<div id="controls" hidden>
+  <button id="btn-tour" class="icon-btn" aria-label="Start guided tour" title="Guided tour"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+  <button id="btn-map" class="icon-btn" aria-label="Show map" aria-pressed="false" title="Map"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8 7l8 4M8 17l8-4"/></svg></button>
+  <button id="btn-zoom-in" class="icon-btn" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+  <button id="btn-zoom-out" class="icon-btn" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button>
+  <button id="btn-gyro" class="icon-btn" aria-label="Gyroscope" aria-pressed="false" title="Gyroscope" hidden><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 019 9M12 21a9 9 0 01-9-9"/></svg></button>
+  <button id="btn-full" class="icon-btn" aria-label="Fullscreen" title="Fullscreen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+
+<!-- Schematic map -->
+<aside id="map" aria-label="Navigation map" hidden>
+  <div class="map-head"><strong>Map</strong><span>schematic · not to scale</span></div>
+  <svg id="map-svg" viewBox="0 0 100 100" role="img" aria-label="Graph of connected locations"></svg>
+  <div class="map-legend"><i class="solid"></i> walkable link <i class="dash dev-only"></i><span class="dev-only"> unverified (editor only)</span></div>
+</aside>
+
+<!-- Info card -->
+<div id="info" role="dialog" aria-live="polite" hidden>
+  <button id="info-close" class="icon-btn small" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <h3 id="info-title"></h3>
+  <p id="info-text"></p>
+</div>
+
+<!-- Guided tour bar -->
+<div id="tourbar" hidden>
+  <div class="tour-progress"><span id="tour-step"></span><div class="bar"><i id="tour-bar-fill"></i></div></div>
+  <p id="tour-text"></p>
+  <div class="tour-actions">
+    <button id="tour-prev" class="btn ghost">Back</button>
+    <button id="tour-pause" class="btn ghost">Pause</button>
+    <button id="tour-next" class="btn">Next</button>
+    <button id="tour-exit" class="btn ghost">Exit tour</button>
+  </div>
+</div>
+
+<div id="hint" hidden>Drag to look around · Tap glowing arrows to move</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- Welcome -->
+<section id="welcome">
+  <div class="welcome-card">
+    <div class="mark" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="3"/><ellipse cx="24" cy="24" rx="9" ry="21" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M3 24h42" stroke="currentColor" stroke-width="2.5"/></svg></div>
+    <p class="eyebrow">360° Virtual Tour</p>
+    <h1 id="welcome-name">School Virtual Tour</h1>
+    <p class="sub" id="welcome-sub"></p>
+    <p class="tagline" id="welcome-tagline"></p>
+    <div class="welcome-actions">
+      <button id="start-explore" class="btn big" disabled>Loading…</button>
+      <button id="start-tour" class="btn big ghost" disabled>Take the guided tour</button>
+    </div>
+    <ul class="how">
+      <li><b>Look</b> drag, swipe or tilt your phone</li>
+      <li><b>Move</b> tap the glowing arrows at doorways</li>
+      <li><b>Jump</b> use the menu or the map</li>
+    </ul>
+    <p id="welcome-error" class="error" hidden></p>
+  </div>
+</section>
+
+<script src="vendor/marzipano.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
