@@ -93,7 +93,7 @@ Pitch is "up is positive" everywhere in the config. (Marzipano uses the opposite
 
 ## Controls
 
-Drag / swipe / arrow keys to look · scroll, pinch or +/− to zoom · tap glowing arrows to move · `M` menu · `F` fullscreen · `Esc` close panels · gyroscope button on phones (iOS asks for motion permission).
+Drag / swipe / arrow keys to look · scroll, pinch or +/− to zoom · tap glowing arrows to move · `M` menu · `F` fullscreen · `Esc` close panels · motion-tracking button on phones (move the phone to look around; iOS asks for motion permission; needs HTTPS).
 
 ## Known limits
 

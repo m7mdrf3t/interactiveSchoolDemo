@@ -520,36 +520,62 @@
     else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
   }
 
+  // Motion tracking: phone orientation drives the view. Marzipano 0.10.2 has no
+  // device-orientation control method, so the view is driven directly.
   function setupGyro() {
     var touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     if (!touch || typeof window.DeviceOrientationEvent === 'undefined') return;
     var btn = $('btn-gyro');
     btn.hidden = false;
+    var g = state.gyro;
+    g.view = null; g.offset = 0; g.yaw = 0; g.pitch = 0; g.lastYaw = null; g.got = false;
+
+    function wrap(a) { while (a > Math.PI) a -= 2 * Math.PI; while (a < -Math.PI) a += 2 * Math.PI; return a; }
+
+    function onOrient(e) {
+      if (e.alpha == null || e.beta == null || e.gamma == null) return;
+      g.got = true;
+      if (state.busy || !state.current) return;
+      var a = e.alpha * DEG, b = e.beta * DEG, c = e.gamma * DEG;
+      // back-camera direction (0,0,-1) rotated by Rz(a) Rx(b) Ry(c); x east, y north, z up
+      var x0 = -Math.sin(c), y0 = Math.cos(c) * Math.sin(b), z = -Math.cos(c) * Math.cos(b);
+      var dx = x0 * Math.cos(a) - y0 * Math.sin(a), dy = x0 * Math.sin(a) + y0 * Math.cos(a);
+      var yaw = Math.atan2(dx, dy), pitch = Math.asin(Math.max(-1, Math.min(1, z)));
+      var view = state.viewer.view();
+      if (view !== g.view) { // first event or new scene: keep the current heading
+        g.view = view; g.yaw = yaw; g.pitch = pitch;
+        g.offset = view.yaw() - yaw; g.lastYaw = null;
+      }
+      if (g.lastYaw != null) g.offset += wrap(view.yaw() - g.lastYaw); // user dragged
+      g.yaw += wrap(yaw - g.yaw) * 0.4;
+      g.pitch += (pitch - g.pitch) * 0.4;
+      var out = wrap(g.yaw + g.offset);
+      view.setYaw(out);
+      view.setPitch(Math.max(-Math.PI / 2 + 0.05, Math.min(Math.PI / 2 - 0.05, g.pitch)));
+      g.lastYaw = view.yaw();
+    }
+
+    function stop() {
+      window.removeEventListener('deviceorientation', onOrient);
+      g.on = false; g.view = null; g.lastYaw = null;
+      btn.setAttribute('aria-pressed', 'false');
+    }
+
     btn.addEventListener('click', function () {
-      var g = state.gyro;
-      if (g.on) { state.viewer.controls().disableMethod('deviceOrientation'); g.on = false; btn.setAttribute('aria-pressed', 'false'); return; }
+      if (g.on) { stop(); return; }
       var ask = typeof DeviceOrientationEvent.requestPermission === 'function' ? DeviceOrientationEvent.requestPermission() : Promise.resolve('granted');
       ask.then(function (res) {
-        if (res !== 'granted') { toast('Motion access was declined, so the gyroscope is off.', true); return; }
-        var got = false;
-        var probe = function (e) { if (e.alpha != null || e.beta != null) got = true; };
-        window.addEventListener('deviceorientation', probe);
-        if (!g.method) {
-          g.method = new Marzipano.DeviceOrientationControlMethod();
-          state.viewer.controls().registerMethod('deviceOrientation', g.method);
-        }
-        state.viewer.controls().enableMethod('deviceOrientation');
+        if (res !== 'granted') { toast('Motion access was declined, so motion tracking is off.', true); return; }
+        g.got = false; g.view = null;
+        window.addEventListener('deviceorientation', onOrient);
         g.on = true; btn.setAttribute('aria-pressed', 'true');
-        toast('Gyroscope on — move your phone to look around');
+        state.viewer.stopMovement();
+        state.viewer.breakIdleMovement && state.viewer.breakIdleMovement();
+        toast('Motion tracking on — move your phone to look around');
         setTimeout(function () {
-          window.removeEventListener('deviceorientation', probe);
-          if (!got && g.on) {
-            state.viewer.controls().disableMethod('deviceOrientation');
-            g.on = false; btn.setAttribute('aria-pressed', 'false');
-            toast('No gyroscope data from this device.', true);
-          }
+          if (!g.got && g.on) { stop(); toast('No motion data from this device (HTTPS is required).', true); }
         }, 1800);
-      }, function () { toast('Could not enable the gyroscope.', true); });
+      }, function () { toast('Could not enable motion tracking.', true); });
     });
   }
 
