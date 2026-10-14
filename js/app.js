@@ -540,7 +540,7 @@
       // back-camera direction (0,0,-1) rotated by Rz(a) Rx(b) Ry(c); x east, y north, z up
       var x0 = -Math.sin(c), y0 = Math.cos(c) * Math.sin(b), z = -Math.cos(c) * Math.cos(b);
       var dx = x0 * Math.cos(a) - y0 * Math.sin(a), dy = x0 * Math.sin(a) + y0 * Math.cos(a);
-      var yaw = Math.atan2(dx, dy), pitch = Math.asin(Math.max(-1, Math.min(1, z)));
+      var yaw = Math.atan2(dx, dy), pitch = -Math.asin(Math.max(-1, Math.min(1, z))); // Marzipano: positive pitch looks down
       var view = state.viewer.view();
       if (view !== g.view) { // first event or new scene: keep the current heading
         g.view = view; g.yaw = yaw; g.pitch = pitch;
